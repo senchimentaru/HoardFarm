@@ -8,7 +8,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Object;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using HoardFarm.Tasks.Base;
-using ValueType = FFXIVClientStructs.FFXIV.Component.GUI.ValueType;
+
 #pragma warning disable CS8974 // Converting method group to non-delegate type
 
 namespace HoardFarm.Tasks.TaskGroups;
@@ -59,7 +59,7 @@ public class LeaveDutyTask : IBaseTaskGroup
         try {
             var atkValues = (AtkValue*)Marshal.AllocHGlobal(sizeof(AtkValue));
             if (atkValues == null) return null;
-            atkValues[0].Type = ValueType.Int;
+            atkValues[0].Type = FFXIVClientStructs.FFXIV.Component.GUI.ValueType.Int;
             atkValues[0].Int = 0;
             return atkValues;
         } catch (Exception) {
