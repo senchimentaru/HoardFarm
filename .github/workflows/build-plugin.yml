@@ -39,5 +39,5 @@ jobs:
         with:
           tag_name: latest
           name: Latest Build
-          files: HoardFarm/bin/x64/Release/HoardFarm.dll
+          files: HoardFarm/bin/x64/Release/HoardFarm/**
           make_latest: true
