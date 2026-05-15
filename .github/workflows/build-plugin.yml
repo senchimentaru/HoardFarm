@@ -31,12 +31,10 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release --nologo
 
-      - name: Find built files
-        run: find HoardFarm/bin -name "*.dll" | head -20
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: HoardFarm
-          path: HoardFarm/bin/x64/Release/HoardFarm.dll
-          if-no-files-found: warn
+          tag_name: latest
+          name: Latest Build
+          files: HoardFarm/bin/x64/Release/HoardFarm.dll
+          make_latest: true
