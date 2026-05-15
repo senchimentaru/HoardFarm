@@ -56,6 +56,7 @@ public class HoardFarmService : IDisposable
     public int SessionTime;
 
     private ushort? currentTerritoryType;
+    private readonly Action<Lumina.Excel.RowRef<TerritoryType>> _territoryChangedHandler;
 
     private DateTime? timingStart;
 
@@ -65,7 +66,8 @@ public class HoardFarmService : IDisposable
         senseHoardMessage = DataManager.GetExcelSheet<LogMessage>().GetRow(7272).Text.ToDalamudString().GetText();
         noHoardMessage = DataManager.GetExcelSheet<LogMessage>().GetRow(7273).Text.ToDalamudString().GetText();
 
-        ClientState.TerritoryChanged += OnMapChange;
+        _territoryChangedHandler = (t) => OnMapChange((ushort)t.RowId);
+        ClientState.TerritoryChanged += _territoryChangedHandler;
 
         Framework.Update += OnTick;
     }
@@ -86,7 +88,7 @@ public class HoardFarmService : IDisposable
     public void Dispose()
     {
         ChatGui.ChatMessage -= OnChatMessage;
-        ClientState.TerritoryChanged -= OnMapChange;
+        ClientState.TerritoryChanged -= _territoryChangedHandler;
         Framework.Update -= OnTick;
     }
 
@@ -427,27 +429,26 @@ public class HoardFarmService : IDisposable
         }
     }
 
-    private void OnMapChange(uint territoryType)
+    private void OnMapChange(ushort territoryType)
     {
         if (territoryType is HoHMapId11 or HoHMapId21)
         {
             Reset();
             HoardModeStatus = Strings.HoardFarm_Status_Waiting;
-            currentTerritoryType = (ushort)territoryType;
+            currentTerritoryType = territoryType;
         }
     }
 
-    private void OnChatMessage(
-        XivChatType type, int timestamp, ref SeString sender, ref SeString message, ref bool isHandled, bool isBotMessage)
+    private void OnChatMessage(IChatGui.IHandleableChatMessage message)
     {
-        if (senseHoardMessage.Equals(message.TextValue))
+        if (senseHoardMessage.Equals(message.Message.TextValue))
         {
             intuitionUsed = true;
             hoardAvailable = true;
             HoardModeStatus = Strings.HoardFarm_Status_HoardFound;
         }
 
-        if (noHoardMessage.Equals(message.TextValue))
+        if (noHoardMessage.Equals(message.Message.TextValue))
         {
             intuitionUsed = true;
             hoardAvailable = false;
@@ -455,7 +456,7 @@ public class HoardFarmService : IDisposable
             LeaveDuty(Strings.HoardFarm_Status_NoHoard);
         }
 
-        if (hoardFoundMessage.Equals(message.TextValue))
+        if (hoardFoundMessage.Equals(message.Message.TextValue))
         {
             hoardFound = true;
             movementEnd = DateTime.Now;
