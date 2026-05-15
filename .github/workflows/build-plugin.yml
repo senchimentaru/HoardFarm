@@ -41,3 +41,6 @@ jobs:
           name: Latest Build
           files: HoardFarm/bin/x64/Release/HoardFarm/**
           make_latest: true
+
+      - name: Show manifest
+        run: cat HoardFarm/bin/x64/Release/HoardFarm.json || echo "No manifest found"
