@@ -122,6 +122,9 @@ public class MainWindow : Window
 
         ImGui.Separator();
 
+        var overallPercent = Config.OverallRuns == 0 ? 0 : Config.OverallFoundHoards / (double)Config.OverallRuns * 100;
+        var overallTimeAverage = Config.OverallFoundHoards == 0 ? 0 : Config.OverallTime / Config.OverallFoundHoards;
+
         ImGui.BeginGroup();
         ImGui.Text(Strings.MainWindow_Savegame);
         ImGui.Indent(15);
@@ -190,11 +193,9 @@ public class MainWindow : Window
 
         ImGui.Text(Strings.MainWindow_Overall);
         ImGui.Text(string.Format(Strings.MainWindow_Statistics_Runs, Config.OverallRuns));
-        var overallPercent = Config.OverallRuns == 0 ? 0 : Config.OverallFoundHoards / (double)Config.OverallRuns * 100;
         ImGui.Text(
             string.Format(Strings.MainWindow_Statistics_Found, Config.OverallFoundHoards, overallPercent));
 
-        var overallTimeAverage = Config.OverallFoundHoards == 0 ? 0 : Config.OverallTime / Config.OverallFoundHoards;
         if (overallTimeAverage > 0)
             ImGui.Text(string.Format(Strings.MainWindow_TimeWithAverage, FormatTime(Config.OverallTime),
                                      FormatTime(overallTimeAverage, false)));
