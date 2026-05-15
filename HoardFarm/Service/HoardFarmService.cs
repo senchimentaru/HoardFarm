@@ -57,7 +57,7 @@ public class HoardFarmService : IDisposable
     public int SessionTime;
 
     private ushort? currentTerritoryType;
-    private readonly Action<Lumina.Excel.RowRef<TerritoryType>> _territoryChangedHandler;
+    private readonly IClientState.TerritoryChangedDelegate _territoryChangedHandler;
 
     private DateTime? timingStart;
 
