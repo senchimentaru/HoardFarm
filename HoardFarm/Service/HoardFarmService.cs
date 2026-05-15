@@ -57,7 +57,7 @@ public class HoardFarmService : IDisposable
     public int SessionTime;
 
     private ushort? currentTerritoryType;
-    private readonly Action<ushort> _territoryChangedHandler;
+    private readonly Action<uint> _territoryChangedHandler;
 
     private DateTime? timingStart;
 
@@ -430,13 +430,13 @@ public class HoardFarmService : IDisposable
         }
     }
 
-    private void OnMapChange(ushort territoryType)
+    private void OnMapChange(uint territoryType)
     {
         if (territoryType is HoHMapId11 or HoHMapId21)
         {
             Reset();
             HoardModeStatus = Strings.HoardFarm_Status_Waiting;
-            currentTerritoryType = territoryType;
+            currentTerritoryType = (ushort)territoryType;
         }
     }
 
