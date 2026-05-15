@@ -67,7 +67,7 @@ public class HoardFarmService : IDisposable
         senseHoardMessage = DataManager.GetExcelSheet<LogMessage>().GetRow(7272).Text.ToDalamudString().GetText();
         noHoardMessage = DataManager.GetExcelSheet<LogMessage>().GetRow(7273).Text.ToDalamudString().GetText();
 
-        _territoryChangedHandler = (t) => OnMapChange((ushort)t.RowId);
+        _territoryChangedHandler = OnMapChange;
         ClientState.TerritoryChanged += _territoryChangedHandler;
 
         Framework.Update += OnTick;
