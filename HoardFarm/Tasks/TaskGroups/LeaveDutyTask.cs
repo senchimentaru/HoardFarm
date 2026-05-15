@@ -59,7 +59,7 @@ public class LeaveDutyTask : IBaseTaskGroup
         try {
             var atkValues = (AtkValue*)Marshal.AllocHGlobal(sizeof(AtkValue));
             if (atkValues == null) return null;
-            atkValues[0].Type = FFXIVClientStructs.FFXIV.Component.GUI.ValueType.Int;
+            atkValues[0].Type = AtkValueType.Int;
             atkValues[0].Int = 0;
             return atkValues;
         } catch (Exception) {
