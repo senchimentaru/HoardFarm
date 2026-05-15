@@ -57,7 +57,7 @@ public class HoardFarmService : IDisposable
     public int SessionTime;
 
     private ushort? currentTerritoryType;
-    private readonly IClientState.TerritoryChangedDelegate _territoryChangedHandler;
+    private readonly Action<ushort> _territoryChangedHandler;
 
     private DateTime? timingStart;
 
