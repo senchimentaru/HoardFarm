@@ -18,7 +18,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.0.x
+          dotnet-version: 10.0.x
 
       - name: Download Dalamud
         run: |
@@ -31,8 +31,12 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release --nologo
 
+      - name: Find built files
+        run: find HoardFarm/bin -name "*.dll" | head -20
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: HoardFarm
           path: HoardFarm/bin/x64/Release/HoardFarm/
+          if-no-files-found: warn
