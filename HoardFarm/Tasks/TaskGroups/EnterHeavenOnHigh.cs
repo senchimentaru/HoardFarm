@@ -29,7 +29,6 @@ public class EnterHeavenOnHigh : IBaseTaskGroup
         }
 
         result.Add(SelectSave);
-        result.Add(new SelectYesnoTask(ConfirmPartyKoMessageId));
         result.Add(ConfirmDuty);
         result.Add(WaitTillDutyReady);
         return result;
