@@ -5,6 +5,14 @@
         <Version>0.0.0.0</Version>
         <Description>HoardFarm Dalamud Plugin</Description>
         <PackageProjectUrl>https://github.com/Jukkales/HoardFarm</PackageProjectUrl>
+        <Name>HoardFarm</Name>
+        <InternalName>HoardFarm</InternalName>
+        <Author>Jukkales</Author>
+        <Description>Dalamud Plugin to help farming DeepDungeon Hoards</Description>
+        <Punchline>Automate Heaven on High hoard farming</Punchline>
+        <RepoUrl>https://github.com/senchimentaru/HoardFarm</RepoUrl>
+        <DalamudApiLevel>15</DalamudApiLevel>
+        <ApplicableVersion>any</ApplicableVersion>
     </PropertyGroup>
 
     <PropertyGroup>
