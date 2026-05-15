@@ -38,5 +38,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: HoardFarm
-          path: HoardFarm/bin/x64/Release/HoardFarm/
+          path: HoardFarm/bin/x64/Release/HoardFarm.dll
           if-no-files-found: warn
