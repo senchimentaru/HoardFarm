@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Dalamud.Game.Chat;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
@@ -439,16 +440,16 @@ public class HoardFarmService : IDisposable
         }
     }
 
-    private void OnChatMessage(IChatGui.IHandleableChatMessage message)
+    private void OnChatMessage(IHandleableChatMessage chatMessage)
     {
-        if (senseHoardMessage.Equals(message.Message.TextValue))
+        if (senseHoardMessage.Equals(chatMessage.Message.TextValue))
         {
             intuitionUsed = true;
             hoardAvailable = true;
             HoardModeStatus = Strings.HoardFarm_Status_HoardFound;
         }
 
-        if (noHoardMessage.Equals(message.Message.TextValue))
+        if (noHoardMessage.Equals(chatMessage.Message.TextValue))
         {
             intuitionUsed = true;
             hoardAvailable = false;
@@ -456,7 +457,7 @@ public class HoardFarmService : IDisposable
             LeaveDuty(Strings.HoardFarm_Status_NoHoard);
         }
 
-        if (hoardFoundMessage.Equals(message.Message.TextValue))
+        if (hoardFoundMessage.Equals(chatMessage.Message.TextValue))
         {
             hoardFound = true;
             movementEnd = DateTime.Now;
