@@ -427,7 +427,7 @@ public class HoardFarmService : IDisposable
         }
     }
 
-    private void OnMapChange(ushort territoryType, bool arrived)
+    private void OnMapChange(ushort territoryType)
     {
         if (territoryType is HoHMapId11 or HoHMapId21)
         {
@@ -438,7 +438,7 @@ public class HoardFarmService : IDisposable
     }
 
     private void OnChatMessage(
-        XivChatType type, int timestamp, ref SeString sender, ref SeString message, ref bool isHandled, bool isPossiblyBot)
+        XivChatType type, int timestamp, ref SeString sender, ref SeString message, ref bool isHandled)
     {
         if (senseHoardMessage.Equals(message.TextValue))
         {
