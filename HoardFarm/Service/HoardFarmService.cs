@@ -427,18 +427,18 @@ public class HoardFarmService : IDisposable
         }
     }
 
-    private void OnMapChange(ushort territoryType)
+    private void OnMapChange(uint territoryType)
     {
         if (territoryType is HoHMapId11 or HoHMapId21)
         {
             Reset();
             HoardModeStatus = Strings.HoardFarm_Status_Waiting;
-            currentTerritoryType = territoryType;
+            currentTerritoryType = (ushort)territoryType;
         }
     }
 
     private void OnChatMessage(
-        XivChatType type, int timestamp, ref SeString sender, ref SeString message, ref bool isHandled)
+        XivChatType type, int timestamp, ref SeString sender, ref SeString message, ref bool isHandled, bool isBotMessage)
     {
         if (senseHoardMessage.Equals(message.TextValue))
         {
